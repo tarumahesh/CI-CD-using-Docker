@@ -28,15 +28,15 @@ steps:
     script: |
       # Execute the qscanner command
       cd linux-amd64
-      ./qscanner image mtaru/ubuntu --mode get-report --pod US1 --access-token "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJxdWF5c19ieDM2IiwiaXNzIjoicWFzIiwicG9ydGFsVXNlcklkIjozNTE4NTc2OTcsInNlY3JldElkIjoiNzJlOTlhYTctM2Q1YS00YzU3LWFiYWMtNDMxOGIzNzEzZjNjIiwicXdlYlVzZXJJZCI6MjY4MDMxOCwiYXVkIjoicWFzIiwiY3VzdG9tZXJJZCI6MjEyNDY0LCJ1c2VyVXVpZCI6IjljMDFmODY2LTVlZjUtZTc5Yi04MWVhLTRhNDYyYjVkZjFkMSIsInN1YnNjcmlwdGlvblV1aWQiOiIyM2EyYWY3OS0wOGU3LTUyZWQtODIxZC1lZjU5NDMwM2JlMjEiLCJleHAiOjE3NjQxODgxNDgsInN1YnNjcmlwdGlvbklkIjoyODYwMzYsInRva2VuVHlwZSI6InN1YnNjcmlwdGlvbiIsImlhdCI6MTczMjY1MjE0OCwianRpIjoiNWVmMjdkODQtOWJlMi00ZTBlLWFlZjEtMDEzY2UxOTVlNDI2In0.Hxv4RsHGYXTUyOWum4s9oEhywuq5FCbImDICnxQXqcSpUypFafkmPHCLnm5ml885GgyJd1RDHLdGwT0m_1ok8Q" --tags "cicdtest" --report-format sarif,table --output-dir "$(Build.SourcesDirectory)/qualys"
+      ./qscanner image mtaru/ubuntu --mode get-report --pod US1 --access-token "token" --tags "cicdtest" --report-format sarif,table --output-dir "$(Build.SourcesDirectory)/qualys"
       mkdir -p $(Build.SourcesDirectory)/sarif_reports
       cp /home/vsts/work/1/s/qualys/* $(Build.SourcesDirectory)/sarif_reports
       chmod -R a+rwx $(Build.SourcesDirectory)/sarif_reports
 - task: QualysCSConnector@4
   inputs:
     QualysApiServer: 'https://qualysapi.qualys.com'
-    QualysApiUsername: 'quays_mu47'
-    QualysApiPassword: 'nsACrA09{zcr'
+    QualysApiUsername: 'user'
+    QualysApiPassword: 'pwd'
     imageID: 'mtaru/ubuntu:latest'
     dockerUrl: 'unix:///var/run/docker.sock'
 - task: PublishBuildArtifacts@1
